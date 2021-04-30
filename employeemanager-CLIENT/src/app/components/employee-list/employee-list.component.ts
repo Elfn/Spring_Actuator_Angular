@@ -13,6 +13,7 @@ export class EmployeeListComponent implements OnInit {
   // ----------------Variables--------------------------
     public employees: Employee[];
   // ---------------------------------------------------
+  isFound: boolean;
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -21,9 +22,11 @@ export class EmployeeListComponent implements OnInit {
   }
 
   public getEmployees(): void {
-     this.employeeService.getEmployees().subscribe(
+    this.isFound = false;
+    this.employeeService.getEmployees().subscribe(
        (res: Employee[]) => {
-         this.employees = res;
+           this.isFound = true;
+           this.employees = res;
        },
        (error: HttpErrorResponse) => {
          alert(error.message);

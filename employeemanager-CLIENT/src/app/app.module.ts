@@ -6,12 +6,14 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import {EmployeeService} from './services/employee.service';
 import {HttpClientModule} from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeListComponent,
-    NavbarComponent
+    NavbarComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
