@@ -7,6 +7,7 @@ import {EmployeeService} from './services/employee.service';
 import {HttpClientModule} from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import {ModalService} from './services/modal.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [EmployeeService],
+  providers: [EmployeeService, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

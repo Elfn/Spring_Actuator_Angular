@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Employee} from '../../models/employee';
 import {EmployeeService} from '../../services/employee.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ModalService} from '../../services/modal.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,7 +16,7 @@ export class EmployeeListComponent implements OnInit {
   // ---------------------------------------------------
   isFound: boolean;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private openModalService: ModalService) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -34,5 +35,9 @@ export class EmployeeListComponent implements OnInit {
      );
   }
 
+ public onOpenModal(employee: Employee, mode: string): void
+ {
+   this.openModalService.onOpenModal(employee, mode);
+ }
 
 }
