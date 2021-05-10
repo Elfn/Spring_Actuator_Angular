@@ -5,6 +5,7 @@ import {Employee} from '../models/employee';
   providedIn: 'root'
 })
 export class ModalService {
+  public editedEmployee: Employee;
 
   constructor() { }
 
@@ -20,6 +21,7 @@ export class ModalService {
 
     }
     if (mode === 'edit'){
+      this.editedEmployee = employee;
       button.setAttribute('data-target', '#modalEdit');
 
     }

@@ -3,6 +3,8 @@ import {ModalService} from '../../services/modal.service';
 import {Employee} from '../../models/employee';
 import {EmployeeService} from '../../services/employee.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {NgForm} from '@angular/forms';
+import {EmployeeListComponent} from '../employee-list/employee-list.component';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +22,22 @@ export class NavbarComponent implements OnInit {
   public onOpenModal(employee: Employee, mode: string): void
   {
     this.openModalService.onOpenModal(employee, mode);
+  }
+
+
+  onAddEmloyee(addForm: NgForm): void {
+    location.reload();
+    document.getElementById('add-employee-form').click();
+    this.employeeService.addEmployee(addForm.value)
+        .subscribe(
+          (res: Employee) => {
+            console.log(res);
+            addForm.reset();
+          },
+          (err: HttpErrorResponse) => {
+            alert(err.message);
+          }
+        );
   }
 
 

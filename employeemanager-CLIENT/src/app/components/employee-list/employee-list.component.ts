@@ -16,7 +16,7 @@ export class EmployeeListComponent implements OnInit {
   // ---------------------------------------------------
   isFound: boolean;
 
-  constructor(private employeeService: EmployeeService, private openModalService: ModalService) { }
+  constructor(private employeeService: EmployeeService, public openModalService: ModalService) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -35,7 +35,23 @@ export class EmployeeListComponent implements OnInit {
      );
   }
 
- public onOpenModal(employee: Employee, mode: string): void
+
+  onUpdateEmployee(employee: Employee): void {
+    document.getElementById('update-employee-form').click();
+    setTimeout(() => location.reload(), 1000);
+    this.employeeService.updateEmployee(employee)
+      .subscribe(
+        (res: Employee) => {
+          console.log(res);
+        },
+        (err: HttpErrorResponse) => {
+          alert(err.message);
+        }
+      );
+  }
+
+
+  public onOpenModal(employee: Employee, mode: string): void
  {
    this.openModalService.onOpenModal(employee, mode);
  }
