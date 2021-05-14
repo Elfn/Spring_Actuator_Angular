@@ -1,3 +1,7 @@
+<app-navbar></app-navbar>
+<div class="container text-center">
+  <h1 class="mt-5">Welcome</h1>
+</div>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <app-spinner *ngIf="!isFound"></app-spinner>
 <div class="container mt-5" id="main-container">
@@ -28,7 +32,7 @@
           </div>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{emp?.email}}</a></li>
+          <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#" class="text-dark">{{emp?.email}}</a></li>
           <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{emp?.phone}}</li>
         </ul>
         <div class="card-body">
@@ -46,7 +50,6 @@
     </div>
   </div>
 </div>
-
 <div class="modal fade" data-modal-color="" id="modalAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -114,11 +117,11 @@
         <h4 class="modal-title">Employee deletion</h4>
       </div>
       <div class="modal-body">
-       <p>Are you sure you want to delete employee? </p>
+       <p>Are you sure you want to delete {{openModalService.deletedEmployee?.name}} ? </p>
       </div>
       <div class="modal-footer">
-        <button type="button"  class="btn btn-secondary" data-dismiss="modal">No</button>
-        <button type="submit" class="btn btn-danger" >Yes</button>
+        <button type="button" id="delete-employee-form"  class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button (click)="onDeleteEmployee(openModalService.deletedEmployee?.id)" type="submit" class="btn btn-danger" >Yes</button>
         <!--            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>-->
       </div>
     </div>

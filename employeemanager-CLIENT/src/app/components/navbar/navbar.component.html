@@ -9,9 +9,9 @@
         <a href="#" class="nav-link" (click)="onOpenModal(employee,'add')">Add employees <span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form  class="form-inline my-2 my-lg-0">
+      <input ngModel #keyword = "ngModel" (ngModelChange)="onSearch(keyword.value)"  class="form-control mr-sm-2" type="text"  name="search" id="search" placeholder="Search employee">
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
     </form>
   </div>
 </nav>

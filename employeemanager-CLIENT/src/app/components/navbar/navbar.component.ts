@@ -14,7 +14,7 @@ import {EmployeeListComponent} from '../employee-list/employee-list.component';
 export class NavbarComponent implements OnInit {
 
   employee: Employee;
-  constructor(private employeeService: EmployeeService, private openModalService: ModalService) { }
+  constructor(private employeeService: EmployeeService, private openModalService: ModalService, public emplistcmp: EmployeeListComponent) { }
 
   ngOnInit(): void {
   }
@@ -41,4 +41,8 @@ export class NavbarComponent implements OnInit {
   }
 
 
+  onSearch(event: any): void {
+    console.log(event);
+    this.emplistcmp.onSearchEmployee(event);
+  }
 }

@@ -5,7 +5,8 @@ import {Employee} from '../models/employee';
   providedIn: 'root'
 })
 export class ModalService {
-  public editedEmployee: Employee;
+   editedEmployee: Employee;
+   deletedEmployee: Employee;
 
   constructor() { }
 
@@ -26,6 +27,7 @@ export class ModalService {
 
     }
     if (mode === 'delete'){
+      this.deletedEmployee = employee;
       button.setAttribute('data-target', '#modalDelete');
 
     }

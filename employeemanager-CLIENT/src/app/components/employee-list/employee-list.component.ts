@@ -43,11 +43,44 @@ export class EmployeeListComponent implements OnInit {
       .subscribe(
         (res: Employee) => {
           console.log(res);
+          this.getEmployees();
         },
         (err: HttpErrorResponse) => {
           alert(err.message);
         }
       );
+  }
+
+  onDeleteEmployee(employeeId): void {
+    document.getElementById('delete-employee-form').click();
+    setTimeout(() => location.reload(), 1000);
+    this.employeeService.deleteEmployee(employeeId)
+      .subscribe(
+        (res: void) => {
+          console.log(res);
+          this.getEmployees();
+          },
+        (err: HttpErrorResponse) => {
+          alert(err.message);
+        }
+      );
+  }
+
+  onSearchEmployee(keyword: string): void {
+
+    const results: Employee[] = [];
+    for (const employee of this.employees){
+      // If the keyword is contained into name, email, jobtitle etc...
+      if (employee.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 || employee.email.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 || employee.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 || employee.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1){
+          results.push(employee);
+      }
+    }
+
+    this.employees = results;
+    if (results.length === 0 || !keyword){
+      this.getEmployees();
+    }
+
   }
 
 
