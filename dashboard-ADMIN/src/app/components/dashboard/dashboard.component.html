@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4 col-xl-3">
+      <div class="card  bg-c-green order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Success <b>(200)</b></h6>
+          <h2 class="text-right"><i class="fa fa-check-circle f-left"></i><span>486</span></h2>
+          <p class="m-b-0">Updated<span class="f-right">{{currentDate | date:'MM/dd/YYYY'}}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Not found <b>(404)</b></h6>
+          <h2 class="text-right"><i class="fa fa-ban f-left"></i><span>486</span></h2>
+          <p class="m-b-0">Updated<span class="f-right">{{currentDate | date:'MM/dd/YYYY'}}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-yellow order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Bad Request <b>(400)</b></h6>
+          <h2 class="text-right"><i class="fa fa-exclamation-circle f-left"></i><span>486</span></h2>
+          <p class="m-b-0">Updated<span class="f-right">{{currentDate | date:'MM/dd/YYYY'}}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Internal server <b>(500)</b></h6>
+          <h2 class="text-right"><i class="fa fa-bug f-left"></i><span>486</span></h2>
+          <p class="m-b-0">Updated<span class="f-right">{{currentDate | date:'MM/dd/YYYY'}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col ">
+      HTTP Traces
+    </div>
+    <div class="col"></div>
+    <div class="col text-right">
+      <button type="button" class="btn btn-primary">Export to excel</button>
+    </div>
+  </div>
+</div>
+<div class="container mt-2">
+  <table class="table table-striped">
+    <thead>
+    <tr class="text-center">
+      <th scope="col">TimeStamp</th>
+      <th scope="col">Method</th>
+      <th scope="col">Time Taken(ms)</th>
+      <th scope="col">Status</th>
+      <th scope="col">URI</th>
+      <th scope="col">View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center">
+      <td>04/18/2021</td>
+      <td>GET</td>
+      <td>10</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+      <td>
+        <button class="btn btn-outline-primary"><i class="fa fa-eye"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
