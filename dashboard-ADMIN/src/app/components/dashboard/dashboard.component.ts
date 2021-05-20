@@ -45,6 +45,8 @@ export class DashboardComponent implements OnInit {
 
   }
 
+
+
   private processTrace(traces: any[]): void{
     traces.forEach( (res) => {
       switch (res.response.status) {

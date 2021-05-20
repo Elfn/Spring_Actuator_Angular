@@ -6,20 +6,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav  mx-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-server"></i> System: </a>
+      <li class="nav-item px-4">
+        <a class="nav-link" href="#"><i class="fa fa-server"></i> System: <b [ngClass]="{'text-danger' : systemHealth?.status !== 'UP'}">{{systemHealth?.status}}</b></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-database"></i> DB: </a>
+      <li class="nav-item px-2">
+        <a class="nav-link" href="#"><i class="fa fa-database"></i> DB: <b>{{systemHealth?.components.db.details.database}}({{systemHealth?.components.db.status}})</b></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#"><i class="fa fa-hdd-o"></i> Disk Space: </a>
+      <li class="nav-item px-2">
+        <a class="nav-link " href="#"><i class="fa fa-hdd-o"></i> Disk Space: <b>{{systemHealthDiskSpace}}</b></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#"><i class="fa fa-microsoft"></i> Processors: </a>
+      <li class="nav-item px-2">
+        <a class="nav-link " href="#"><i class="fa fa-microsoft"></i> Processors:  <b [ngClass]="{'text-danger' : systemCPU?.measurements[0].value < 2}" >{{systemCPU?.measurements[0].value}}</b></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#"><i class="fa fa-clock-o"></i> Up time: </a>
+      <li class="nav-item px-2">
+        <a class="nav-link " href="#"><i class="fa fa-clock-o"></i> Up time: <b>{{processUpTime}}</b></a>
       </li>
     </ul>
 <!--    <form class="form-inline my-2 my-lg-0">-->
