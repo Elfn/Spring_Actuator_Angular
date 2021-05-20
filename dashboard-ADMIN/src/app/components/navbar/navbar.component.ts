@@ -3,6 +3,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';
 import {SystemCPU} from '../../interfaces/system-cpu';
 import {SystemHealth} from '../../interfaces/system-health';
+import {DashboardComponent} from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +15,14 @@ export class NavbarComponent implements OnInit {
   public systemHealth: SystemHealth;
   public processUpTime: any;
   public systemHealthDiskSpace: any;
+  public timeStamp: number;
 
-  constructor(private dashService: AdminDashboardService) { }
+  constructor(private dashService: AdminDashboardService, private dashcmp: DashboardComponent) { }
 
   ngOnInit(): void {
     this.getSystemCPU();
     this.getSystemHealth();
-    this.getProcessUpTime();
+    this.getProcessUpTime(true);
   }
 
   private getSystemCPU(): void {
@@ -52,13 +54,24 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  private updateTime(): void {
+    setInterval(() => {
+      this.processUpTime = this.formateUptime(Math.round(this.timeStamp + 1));
+      this.timeStamp++;
+    }, 1000);
+  }
 
-  private getProcessUpTime(): void {
+
+  private getProcessUpTime(isUpdateTime: boolean): void {
 
     this.dashService.getProcessUpTime().subscribe(
       (res) => {
         console.log('UP TIME ', res);
-        this.processUpTime = this.formateUptime(Math.round(res.measurements[0].value));
+        this.timeStamp = res.measurements[0].value;
+        if (isUpdateTime)
+        {
+          this.updateTime();
+        }
       },
       (err: HttpErrorResponse) => {
         alert(err.message);
@@ -88,4 +101,11 @@ export class NavbarComponent implements OnInit {
     return(n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
   }
 
+  public onRefreshData(): void {
+    this.dashcmp.ngOnInit();
+    this.dashcmp.onEmptyArrays();
+    this.getSystemCPU();
+    this.getSystemHealth();
+    this.getProcessUpTime(false);
+  }
 }

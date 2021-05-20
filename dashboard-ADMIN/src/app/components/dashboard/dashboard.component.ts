@@ -74,6 +74,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  public onEmptyArrays(): void{
+  this.http200Traces = [];
+  this.http404Traces = [];
+  this.http400Traces = [];
+  this.http500Traces = [];
+  this.httpDefaultTraces = [];
+  }
+
   onSelectTrace(trace: any): void {
     // document.getElementById('details-modal-btn').click();
     this.selectedTrace = (trace) ? trace : null;
