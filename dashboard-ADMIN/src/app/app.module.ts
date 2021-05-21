@@ -6,6 +6,7 @@ import {AdminDashboardService} from './services/admin-dashboard.service';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [AdminDashboardService],
   bootstrap: [AppComponent]
