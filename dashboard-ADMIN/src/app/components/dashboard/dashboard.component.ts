@@ -4,19 +4,16 @@ import {SystemCPU} from '../../interfaces/system-cpu';
 import {SystemHealth} from '../../interfaces/system-health';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
-import * as Chart from 'chart.js';
+import {ThemeOption} from 'ngx-echarts';
+import {CoolTheme} from '../../model/data';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-//https://mdbootstrap.com/docs/angular/getting-started/quick-start/
-
-
-
+// https://mdbootstrap.com/docs/angular/getting-started/quick-start/
   currentDate = Date.now();
   public traceList: any[] = [];
   public selectedTrace: any;
@@ -28,15 +25,102 @@ export class DashboardComponent implements OnInit {
   public http400Traces: any[] = [];
   public http500Traces: any[] = [];
   public httpDefaultTraces: any[] = [];
+  initOpts: any;
+  options: any;
+  theme: string | ThemeOption;
+   coolTheme: any;
+   options2: any;
+
+
+
   constructor(private dashService: AdminDashboardService) {
   }
   ngOnInit(): void {
     this.getTraces();
     console.log('LLLLL ', this.http200Traces.length);
+    this.initializeBarChart();
+    this.initializeCircleChart();
+
   }
 
 
 
+  private initializeBarChart(): void{
+    this.initOpts = {
+      renderer: 'svg',
+      width: 550,
+      height: 300
+    };
+
+    this.options = {
+      color: ['#3398DB'],
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['200', '404', '400', '500'],
+          axisTick: {
+            alignWithLabel: true
+          }
+        }
+      ],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: 'Counters',
+        type: 'bar',
+        barWidth: '60%',
+        data: [this.http200Traces.length, this.http404Traces.length, this.http400Traces.length, this.http500Traces.length]
+      }]
+    };
+  }
+  private initializeCircleChart(): void{
+
+    this.coolTheme = CoolTheme;
+    this.options2 = {
+      title: {
+        text: 'HTTP REQUESTS',
+        subtext: '',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+      legend: {
+        x: 'center',
+        y: 'bottom',
+        data: ['404', '200', '400', '500']
+      },
+      calculable: true,
+      series: [
+        {
+          name: 'area',
+          type: 'pie',
+          radius: [30, 110],
+          roseType: 'area',
+          data: [
+            { value: this.http404Traces.length, name: '404' },
+            { value: this.http200Traces.length, name: '200' },
+            { value: this.http400Traces.length, name: '400' },
+            { value: this.http500Traces.length, name: '500' },
+          ]
+        }
+      ]
+    };
+  }
 
 
   private getTraces(): void {
