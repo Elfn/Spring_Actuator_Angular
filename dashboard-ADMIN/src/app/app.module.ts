@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {NgxEchartsModule} from 'ngx-echarts';
     HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    NgxPaginationModule
   ],
   providers: [AdminDashboardService],
   bootstrap: [AppComponent]

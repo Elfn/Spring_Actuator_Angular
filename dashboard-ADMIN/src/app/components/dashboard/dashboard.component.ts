@@ -30,6 +30,9 @@ export class DashboardComponent implements OnInit {
   theme: string | ThemeOption;
    coolTheme: any;
    options2: any;
+  data: any = [];
+  totalRecords: number;
+  page = 1;
 
 
 
@@ -92,7 +95,6 @@ export class DashboardComponent implements OnInit {
     this.options2 = {
       title: {
         text: 'HTTP REQUESTS',
-        subtext: '',
         x: 'center'
       },
       tooltip: {
@@ -109,7 +111,7 @@ export class DashboardComponent implements OnInit {
         {
           name: 'area',
           type: 'pie',
-          radius: [30, 110],
+          radius: [30, 100],
           roseType: 'area',
           data: [
             { value: this.http404Traces.length, name: '404' },
@@ -129,6 +131,7 @@ export class DashboardComponent implements OnInit {
       (res) => {
         console.log(res.traces);
         this.traceList = res.traces;
+        this.totalRecords = this.traceList.length;
         this.processTrace(this.traceList);
       },
       (err: HttpErrorResponse) => {
@@ -137,6 +140,11 @@ export class DashboardComponent implements OnInit {
     );
 
   }
+
+  pageChanged(nb): void {
+    this.page = nb;
+  }
+
 
 
   private formatDate(date: Date): string {
