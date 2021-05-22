@@ -6,6 +6,7 @@ import {AdminDashboardService} from '../../services/admin-dashboard.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ThemeOption} from 'ngx-echarts';
 import {CoolTheme} from '../../model/data';
+import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,7 +44,6 @@ export class DashboardComponent implements OnInit {
     console.log('LLLLL ', this.http200Traces.length);
     this.initializeBarChart();
     this.initializeCircleChart();
-
   }
 
 
@@ -196,6 +196,18 @@ export class DashboardComponent implements OnInit {
     this.http400Traces = [];
     this.http500Traces = [];
     this.httpDefaultTraces = [];
+  }
+
+  public exportTableToExcel(): void{
+    const downloadLink = document.createElement('a');
+    const dataType = 'application/vnd.ms-excel';
+    const table = document.getElementById('httptrace-table');
+    const tableHTML = table.outerHTML.replace(/ /g, '%20');
+    const filename = 'httptrace.xls';
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    downloadLink.download = filename;
+    downloadLink.click();
   }
 
   onSelectTrace(trace: any): void {
